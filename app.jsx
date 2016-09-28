@@ -7,8 +7,20 @@ class App extends React.Component{
         this.state = {
             clicks: 0,
             helpers: 0,
-            cost: 10
+            cost: 10,
+            seconds: 0
         };
+    }
+    componentDidMount(){
+        this.interval = setInterval(this.tick.bind(this), 1000);
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+    tick(){
+        this.setState({
+            clicks: this.state.clicks + this.state.helpers,
+        });
     }
     handleClick(e){
 		e.preventDefault();
@@ -27,15 +39,7 @@ class App extends React.Component{
           cost: this.state.cost + helperCost,
         });
       }
-      if(this.state.helpers >= 1){
-        helperRun();
-      }
       //var nextCost = Math.floor(10 * Math.pow(1.1, helperCost));
-    }
-    helperRun(){
-      window.setInterval(function(){
-        this.handleClick(this.state.helpers);
-      }, 1000);
     }
     render(){
         return <div className="container">
