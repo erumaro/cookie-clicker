@@ -1,0 +1,72 @@
+@import "normalize.css";
+
+html,
+body {
+    background-image: url(images/pexels-photo-27403.jpg);
+    background-size: cover;
+}
+
+h1{
+    margin: 0;
+    padding: 2em 0;
+    text-align: center;
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 20vh;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.enemy, .helpers{
+    width: 40%;
+    margin: 2.5%;
+    float: left;
+}
+
+.enemy p, .helpers p{
+    background: white;
+    padding: 2em;
+    text-align: center;
+    border: 0.5em solid black;
+}
+
+.orc, .knights {
+    height: 300px;
+}
+
+.orc:hover {
+    cursor: url(images/zeimusu-Sword.svg), auto;
+}
+
+.orc:active {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+    20%,
+    80% {
+        transform: translate3d(20px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-40px, 0, 0);
+    }
+    40%,
+    60% {
+        transform: translate3d(40px, 0, 0);
+    }
+}
