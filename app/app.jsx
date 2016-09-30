@@ -15,22 +15,22 @@ class App extends React.Component{
         this.state = {
             clicks: 0,
             knights: 0,
-            //archers: 0,
-            //mages: 0,
-            knightCost: 10
-            //archerCost: 25,
-            //mageCost: 100
+            archers: 0,
+            mages: 0,
+            knightCost: 10,
+            archerCost: 25,
+            mageCost: 100
         };
     }
     componentDidMount(){
-        this.interval = setInterval(this.tick.bind(this), 1000);
+        this.interval = setInterval(this.tick.bind(this), 2000);
     }
     componentWillUnmount(){
         clearInterval(this.interval);
     }
     tick(){
         this.setState({
-            clicks: this.state.clicks + this.state.knights,
+            clicks: this.state.clicks + (this.state.knights+this.state.archers+this.state.mages),
         });
     }
     handleClick(e){
@@ -39,22 +39,34 @@ class App extends React.Component{
             clicks: this.state.clicks + 1,
         });
     }
-    addHelper(e){
+    addKnights(e){
       e.preventDefault();
-      var knightCost = Math.floor(10 * Math.pow(1.1,this.state.knights));
-      if(this.state.clicks >= knightCost){
-        // this.state.helpers = this.state.helpers + 1;
+      if(this.state.clicks >= this.state.knightCost){
         this.setState({
           knights: this.state.knights + 1,
-          clicks: this.state.clicks - knightCost,
-          cost: this.state.cost + knightCost,
+          clicks: this.state.clicks - this.state.knightCost,
+          knightCost: this.state.knightCost + this.state.knightCost,
         });
       }
-      if(this.state.knights >= 10){
-          var moreExpensive = knightCost * 10;
-          this.setState({
-              cost: this.state.cost + moreExpensive,
-          });
+    }
+    addArcher(e){
+      e.preventDefault();
+      if(this.state.clicks >= this.state.archerCost){
+        this.setState({
+          archers: this.state.archers + 1,
+          clicks: this.state.clicks - this.state.archerCost,
+          archerCost: this.state.archerCost + this.state.archerCost,
+        });
+      }
+    }
+    addMage(e){
+      e.preventDefault();
+      if(this.state.clicks >= this.state.mageCost){
+        this.setState({
+          mages: this.state.mages + 1,
+          clicks: this.state.clicks - this.state.mageCost,
+          mageCost: this.state.mageCost + this.state.mageCost,
+        });
       }
     }
     render(){
@@ -67,8 +79,17 @@ class App extends React.Component{
                 </div>
                 <div className="helpers">
                     <img className="knights" src="images/1303409161.svg" />
-                    <p>Knights assisting you in combat: {this.state.knights}</p>
-                    <button disabled={this.state.clicks < this.state.knightCost} onClick={(e) =>this.addHelper(e)}>Add knight (Costs: {this.state.knightCost} gold)</button>
+                    <img className="archer" src="images/archer.svg" />
+                    <img className="mage" src="images/1320132774.svg" />
+                    <p>Soldiers assisting you in combat:</p>
+                    <ul>
+                        <li>Knights: {this.state.knights}</li>
+                        <li>Archers: {this.state.archers}</li>
+                        <li>Mages: {this.state.mages}</li>
+                    </ul>
+                    <button disabled={this.state.clicks < this.state.knightCost} onClick={(e) =>this.addKnights(e)}>Add knight (Costs: {this.state.knightCost} gold)</button>
+                    <button disabled={this.state.clicks < this.state.archerCost} onClick={(e) =>this.addArcher(e)}>Add archer (Costs: {this.state.archerCost} gold)</button>
+                    <button disabled={this.state.clicks < this.state.mageCost} onClick={(e) =>this.addMage(e)}>Add mage (Costs: {this.state.mageCost} gold)</button>
                 </div>
             </div>
         </div>

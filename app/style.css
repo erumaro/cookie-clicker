@@ -15,7 +15,6 @@ h1{
 .wrapper {
     width: 1000px;
     margin: 0 auto;
-    margin-top: 20vh;
 }
 
 img {
@@ -24,9 +23,16 @@ img {
 }
 
 .enemy, .helpers{
-    width: 40%;
     margin: 2.5%;
     float: left;
+}
+
+.enemy{
+    width: 30%;
+}
+
+.helpers{
+    width: 60%;
 }
 
 .enemy p, .helpers p{
@@ -36,12 +42,29 @@ img {
     border: 0.5em solid black;
 }
 
-.orc, .knights {
+.orc, .knights, .archer, .mage {
     height: 300px;
+    width: auto;
+}
+
+.helpers img{
+
+}
+
+.helpers ul{
+    list-style: none;
+    padding: 0;
+}
+
+.helpers ul li{
+    display: inline-block;
+    margin-right: 1em;
+    background: white;
+    padding: 0.5em;
 }
 
 .orc:hover {
-    cursor: url(images/zeimusu-Sword.svg), auto;
+    cursor: pointer;
 }
 
 .orc:active {
