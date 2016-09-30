@@ -13,32 +13,42 @@ class App extends React.Component{
     constructor(){
         super();
         this.state = {
-            clicks: 0,
+            clicks: 0, // click count
+            // Number of each helper/soldier
             knights: 0,
             archers: 0,
             mages: 0,
+            // Initial cost of each helper/soldier
             knightCost: 10,
             archerCost: 25,
             mageCost: 100
         };
     }
     componentDidMount(){
+        // Interval runs every other second (aka 2 sec)
         this.interval = setInterval(this.tick.bind(this), 2000);
     }
     componentWillUnmount(){
+        // Clears interval
         clearInterval(this.interval);
     }
     tick(){
+        // Archers and mages do more damage to the orcs (5 times and 20 times the normal click and knights)
+        var archerDmg = this.state.archers * 5;
+        var mageDmg = this.state.mages * 20;
+        // Sets the state for the intervaled "clicks". I've set it so the helpers combines.
         this.setState({
-            clicks: this.state.clicks + (this.state.knights+this.state.archers+this.state.mages),
+            clicks: this.state.clicks + (this.state.knights+archerDmg+mageDmg),
         });
     }
+    // Click handler, each click adds one.
     handleClick(e){
 		e.preventDefault();
         this.setState({
             clicks: this.state.clicks + 1,
         });
     }
+    // The three below adds a new soldier if the amount clicks have reached the required level. Cost doubles each buy.
     addKnights(e){
       e.preventDefault();
       if(this.state.clicks >= this.state.knightCost){
@@ -69,6 +79,7 @@ class App extends React.Component{
         });
       }
     }
+    // Renders the visual area. If you can't afford the soldiers the button is disabled until you got enough gold.
     render(){
         return <div className="container">
             <h1>Kill the orcs!</h1>

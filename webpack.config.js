@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: 'eval',
+    // while running the server, make sure the content of app folder is shown, not root. Hot loading as I understand it is to rebuild all constantly.
     devServer: {
         contentBase: "./app",
         hot: true

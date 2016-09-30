@@ -42,6 +42,15 @@ img {
     border: 0.5em solid black;
 }
 
+.enemy p{
+    background: red;
+    color: white;
+}
+
+.helpers p{
+    border-color: dodgerblue;
+}
+
 .orc, .knights, .archer, .mage {
     height: 300px;
     width: auto;
